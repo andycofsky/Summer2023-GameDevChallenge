@@ -4,17 +4,37 @@ using UnityEngine;
 
 public class FlappyController : MonoBehaviour
 {
-    Rigidbody2D rb;
     [SerializeField] float upMultiplier;
+    public bool gameStopped;
+
+    private Transform flappyTransform;
+    private Rigidbody2D rb;
+    private Animator animator;
 
     void Start()
     {
+        gameStopped = false;
+        flappyTransform = transform;
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     void Update()
     {
-        if (Input.GetButtonDown("Fire1") || Input.GetButtonDown("Jump"))
-            rb.velocity = new Vector2(0, upMultiplier);
+        if (!gameStopped)
+        {
+            if (Input.GetButtonDown("Fire1") || Input.GetButtonDown("Jump"))
+            {
+                animator.Play("Dive Layer.Dive", -1, 0.0f);
+                rb.velocity = new Vector2(0, upMultiplier);
+            }
+        }
+    }
+
+    public void StopGame()
+    {
+        gameStopped = true;
+        GetComponent<Rigidbody2D>().simulated = false;
+        animator.enabled = false;
     }
 }

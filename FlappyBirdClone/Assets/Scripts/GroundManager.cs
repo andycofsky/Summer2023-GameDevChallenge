@@ -4,20 +4,35 @@ using UnityEngine;
 
 public class GroundManager : MonoBehaviour
 {
-    Transform transform;
     [SerializeField] float speed;
+    Transform groundTransform;
+    
+    private bool gameStopped;
 
     // Start is called before the first frame update
     void Start()
     {
-        transform = gameObject.transform;
+        groundTransform = transform;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(new Vector3(-speed * Time.deltaTime, 0));
-        if (transform.position.x <= -4.7f)
-            transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
+        if (!gameStopped)
+        {
+            groundTransform.Translate(new Vector3(-speed * Time.deltaTime, 0));
+            if (transform.position.x <= -4.7f)
+                transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
+        }
+    }
+
+    public void StopGame()
+    {
+        gameStopped = true;
+    }
+
+    public void StartGame()
+    {
+        gameStopped = false;
     }
 }

@@ -5,15 +5,43 @@ using UnityEngine;
 public class PipeManager : MonoBehaviour
 {
     [SerializeField] GameObject pipePrefab;
+    [SerializeField] float timeBetweenPipes;
 
     void Start()
     {
-        Instantiate(pipePrefab, new Vector3(3.7f, 0.54f, 0), Quaternion.identity);
+        StartCoroutine(SpawnPipe());
     }
 
-    // Update is called once per frame
     void Update()
     {
         
+    }
+
+    IEnumerator SpawnPipe()
+    {
+        GameObject child;
+        while (true)
+        {
+            child = Instantiate(pipePrefab, new Vector3(3.7f, Random.Range(-0.5f, 2.2f), 0), Quaternion.identity);
+            child.transform.parent = transform;
+            yield return new WaitForSeconds(timeBetweenPipes);
+        }
+    }
+
+    public void StopGame()
+    {
+        StopAllCoroutines();
+        foreach (Transform child in transform)
+        {
+            child.GetComponent<Pipes>().gameStopped = true;
+        }
+    }
+
+    public void StartGame()
+    {
+        while (transform.childCount > 0)
+        {
+            Destroy(transform.GetChild(0).gameObject);
+        }
     }
 }
