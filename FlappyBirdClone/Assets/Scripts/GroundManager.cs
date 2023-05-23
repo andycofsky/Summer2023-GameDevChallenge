@@ -6,7 +6,7 @@ public class GroundManager : MonoBehaviour
 {
     [SerializeField] float speed;
     Transform groundTransform;
-    
+
     private bool gameStopped;
 
     // Start is called before the first frame update

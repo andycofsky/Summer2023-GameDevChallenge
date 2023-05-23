@@ -37,4 +37,14 @@ public class FlappyController : MonoBehaviour
         GetComponent<Rigidbody2D>().simulated = false;
         animator.enabled = false;
     }
+
+    public void StartGame()
+    {
+        gameStopped = false;
+        GetComponent<Rigidbody2D>().simulated = true;
+        animator.enabled = true;
+
+        flappyTransform.position = Vector3.zero;
+        animator.Play("Dive Layer.Dive", -1, 0.0f);
+    }
 }

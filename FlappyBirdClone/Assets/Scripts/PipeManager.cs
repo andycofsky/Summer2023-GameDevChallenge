@@ -12,13 +12,9 @@ public class PipeManager : MonoBehaviour
         StartCoroutine(SpawnPipe());
     }
 
-    void Update()
-    {
-        
-    }
-
     IEnumerator SpawnPipe()
     {
+        yield return new WaitForSeconds(6.0f);
         GameObject child;
         while (true)
         {
@@ -43,5 +39,7 @@ public class PipeManager : MonoBehaviour
         {
             Destroy(transform.GetChild(0).gameObject);
         }
+
+        Start();
     }
 }
