@@ -35,9 +35,9 @@ public class PipeManager : MonoBehaviour
 
     public void StartGame()
     {
-        while (transform.childCount > 0)
+        foreach (Transform child in transform)
         {
-            Destroy(transform.GetChild(0).gameObject);
+            Destroy(child.gameObject);
         }
 
         Start();

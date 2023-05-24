@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
         ground.GetComponent<GroundManager>().StopGame();
         flappyBird.GetComponent<FlappyController>().StopGame();
         pipeManager.GetComponent<PipeManager>().StopGame();
+        UI.GetComponent<UserInterface>().StopGame();
 
         if (currentScore > highScore)
             highScore = currentScore;
@@ -39,8 +40,10 @@ public class GameManager : MonoBehaviour
         ground.GetComponent<GroundManager>().StartGame();
         flappyBird.GetComponent<FlappyController>().StartGame();
         pipeManager.GetComponent<PipeManager>().StartGame();
+        UI.GetComponent<UserInterface>().StartGame();
 
         currentScore = 0;
+        UI.GetComponent<UserInterface>().UpdateScore(currentScore);
     }
 
 
