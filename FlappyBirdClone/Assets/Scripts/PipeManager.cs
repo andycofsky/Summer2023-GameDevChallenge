@@ -7,11 +7,6 @@ public class PipeManager : MonoBehaviour
     [SerializeField] GameObject pipePrefab;
     [SerializeField] float timeBetweenPipes;
 
-    void Start()
-    {
-        StartCoroutine(SpawnPipe());
-    }
-
     IEnumerator SpawnPipe()
     {
         yield return new WaitForSeconds(6.0f);
@@ -39,7 +34,10 @@ public class PipeManager : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
-
-        Start();
     }
+
+    public void SpawnPipes()
+    {
+        StartCoroutine(SpawnPipe());
+    }    
 }
